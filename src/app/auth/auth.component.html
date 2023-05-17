@@ -1,0 +1,44 @@
+<main>
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Correo electrónico</mat-label>
+      <input
+        matInput
+        required
+        type="email"
+        formControlName="email"
+        placeholder="correo@gmail.com"
+      />
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+        Ingresa tu correo electrónico
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+        Ingresa un correo electrónico válido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        required
+        id="password"
+        name="password"
+        type="password"
+        formControlName="password"
+        placeholder="Enter your password"
+      />
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+        Ingresa tu contraseña
+      </mat-error>
+    </mat-form-field>
+    <!-- disabled button if form is invalid -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
+      Iniciar sesión
+    </button>
+  </form>
+</main>

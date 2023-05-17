@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth.component';
+import { AuthComponent } from './login.component';
 import { IsNotAuthenticatedGuard } from 'src/guards/is-not-authenticated.guard';
 import { IsAuthenticatedGuard } from 'src/guards/is-authenticated.guard';
 

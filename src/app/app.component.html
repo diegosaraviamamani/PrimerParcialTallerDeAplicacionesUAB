@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Third Line</span>
+  <mat-toolbar-row class="toolbar">
+    <a mat-button routerLink="/products">PRODUCTOS</a>
+    <a mat-button routerLink="/categories">CATEGORÍAS</a>
+    <a mat-button routerLink="/profile">PERFIL</a>
     <span class="spacer"></span>
     <!-- logout button with "Cerrar sesión" text and icon -->
     <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">
@@ -9,4 +11,6 @@
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet> </router-outlet>
+</div>

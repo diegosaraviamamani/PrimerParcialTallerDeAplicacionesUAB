@@ -1,0 +1,20 @@
+<div class="dialog">
+  <h1 mat-dialog-title>Nombre: {{ product.title }}</h1>
+  <!-- image -->
+  <img src="{{ product.images[0] }}" alt="Photo of a Shiba Inu" />
+  <mat-dialog-content>
+    <ul>
+      <li>Precio: {{ product.price }} Bs.</li>
+      <li>
+        Fecha de publicación: {{ product.creationAt | date : "dd/MM/yyyy" }}
+      </li>
+      <li>Descripción: {{ product.description }}</li>
+    </ul>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <!-- delete button -->
+    <button mat-button mat-dialog-close color="warn" (click)="deleteProduct()">
+      Eliminar
+    </button>
+  </mat-dialog-actions>
+</div>

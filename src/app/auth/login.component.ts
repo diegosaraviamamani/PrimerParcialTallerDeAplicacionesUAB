@@ -6,12 +6,15 @@ import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class AuthComponent {
   loginForm = new FormGroup({
-    email: new FormControl('mari@mail.com', [Validators.required, Validators.email]),
+    email: new FormControl('mari@mail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
     password: new FormControl('12345', [Validators.required]),
   });
 

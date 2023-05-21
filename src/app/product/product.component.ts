@@ -29,7 +29,16 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.listProducts();
     this.productService.deletedProduct$.subscribe(() => {
-      this.listProducts();
+      const categoryId = this.route.snapshot.queryParams['categoryId'];
+      if (categoryId) {
+        this.productService
+          .getProductsByCategoryId(categoryId)
+          .subscribe((products) => {
+            this.products = products;
+          });
+      } else {
+        this.listProducts();
+      }
     });
     this.route.queryParamMap.subscribe((params) => {
       const productId = params.get('productId');

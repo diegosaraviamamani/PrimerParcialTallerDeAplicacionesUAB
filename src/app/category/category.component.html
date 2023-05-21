@@ -1,0 +1,17 @@
+<h2>CATEGORIAS</h2>
+<main>
+  <div class="grid">
+    <mat-card
+        class="card"
+        *ngFor="let category of categories"
+        (click)="onSelectCategory(category.id)"
+    >
+        <mat-card-header>
+            <mat-card-title>{{ category.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ category.creationAt | date : "dd/MM/yyyy" }}</p>
+        </mat-card-content>
+    </mat-card>
+  </div>
+</main>

@@ -18,6 +18,11 @@ export class ProductService {
   getAllProducts() {
     return this.http.get<Product[]>(`${this.url}/products`);
   }
+  getProductsByCategoryId(categoryId: string) {
+    return this.http.get<Product[]>(
+      `${this.url}/products?categoryId=${categoryId}`
+    );
+  }
 
   getProductById(id: string) {
     return this.http.get<Product>(`${this.url}/products/${id}`);

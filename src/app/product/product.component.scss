@@ -1,16 +1,15 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 10px;
-  margin: 10px;
+.subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  h3 {
+    margin: 0;
+  }
 }
 
 .card {
-  cursor: pointer !important;
-  &:hover {
-    // add bg color
-    background-color: #f5f5f5;
-  }
   img {
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -19,4 +18,11 @@
 
 .dialog {
   background-color: red;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 2rem;
+  margin: 10px;
 }

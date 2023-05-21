@@ -7,19 +7,20 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { CategoryService } from 'src/services/category.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  styleUrls: ['./product.component.scss', '../app.component.scss'],
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
-  reloadProducts$ = new Subject<void>();
+  categoryName: string = '';
 
   constructor(
     public productService: ProductService,
+    public categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog
@@ -32,6 +33,7 @@ export class ProductComponent implements OnInit {
     });
     this.route.queryParamMap.subscribe((params) => {
       const productId = params.get('productId');
+      const categoryId = params.get('categoryId');
       if (productId) {
         this.productService.getProductById(productId).subscribe((product) => {
           const dialogConfig: MatDialogConfig = { data: product };
@@ -40,13 +42,24 @@ export class ProductComponent implements OnInit {
             dialogConfig
           );
           dialogRef.afterClosed().subscribe(() => {
-            this.router.navigate(['/product']);
+            const queryParams = { ...this.route.snapshot.queryParams };
+            delete queryParams['productId'];
+            this.router.navigate(['/product'], { queryParams });
           });
         });
       }
-    });
-    this.reloadProducts$.subscribe(() => {
-      this.listProducts();
+      if (categoryId) {
+        this.categoryService.getCategoryById(categoryId).subscribe((cat) => {
+          this.categoryName = cat.name;
+        });
+        this.productService
+          .getProductsByCategoryId(categoryId)
+          .subscribe((products) => {
+            this.products = products;
+          });
+      } else {
+        this.listProducts();
+      }
     });
   }
 
@@ -57,7 +70,16 @@ export class ProductComponent implements OnInit {
   }
 
   onSelectProduct(id: number) {
-    this.router.navigate(['/product'], { queryParams: { productId: id } });
+    this.router.navigate(['/product'], {
+      queryParams: { productId: id, ...this.route.snapshot.queryParams },
+    });
+  }
+
+  removeCategoryFilter() {
+    const queryParams = { ...this.route.snapshot.queryParams };
+    delete queryParams['categoryId'];
+    this.router.navigate(['/product'], { queryParams });
+    this.categoryName = '';
   }
 }
 

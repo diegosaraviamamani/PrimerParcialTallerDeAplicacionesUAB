@@ -1,36 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviroments';
-import { Product } from 'src/app/product/product.model';
-import { Subject, catchError, tap, throwError } from 'rxjs';
+import { Category } from 'src/app/category/category.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class CategoryService {
   private url: string;
-  private deletedProductSource = new Subject<void>();
-  deletedProduct$ = this.deletedProductSource.asObservable();
 
   constructor(public http: HttpClient) {
     this.url = environment.baseUrl;
   }
-  getAllProducts() {
-    return this.http.get<Product[]>(`${this.url}/products`);
+  getAllCategories() {
+    return this.http.get<Category[]>(`${this.url}/categories`);
   }
 
-  getProductById(id: string) {
-    return this.http.get<Product>(`${this.url}/products/${id}`);
-  }
-
-  deleteProduct(id: string) {
-    return this.http.delete(`${this.url}/products/${id}`).pipe(
-      tap(() => {
-        this.deletedProductSource.next();
-      }),
-      catchError((error) => {
-        return throwError(() => error);
-      })
-    );
+  getCategoryById(id: string) {
+    return this.http.get<Category>(`${this.url}/categories/${id}`);
   }
 }

@@ -1,10 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="toolbar">
-    <a mat-button routerLink="/products">PRODUCTOS</a>
-    <a mat-button routerLink="/categories">CATEGORÍAS</a>
-    <a mat-button routerLink="/profile">PERFIL</a>
+    <a mat-button routerLink="/product">PRODUCTOS</a>
+    <a mat-button routerLink="/category">CATEGORÍAS</a>
     <span class="spacer"></span>
-    <!-- logout button with "Cerrar sesión" text and icon -->
+    
     <button mat-button *ngIf="authService.isAuthenticated()" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
       Cerrar sesión

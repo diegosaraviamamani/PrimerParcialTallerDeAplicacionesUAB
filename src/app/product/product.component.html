@@ -1,17 +1,18 @@
-<h2>PRODUCT MODULE</h2>
+<h2>PRODUCTOS</h2>
+<div *ngIf="categoryName" class="subtitle">
+  <h3>Categoria: {{ categoryName }}</h3>
+  <button mat-icon-button (click)="removeCategoryFilter()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
 <main>
-  <div class="grid">
+  <div *ngIf="products?.length !== 0" class="grid">
     <mat-card
       class="card"
       *ngFor="let product of products"
       (click)="onSelectProduct(product.id)"
     >
-      <!-- <img
-        mat-card-image
-        alt="Photo of a Shiba Inu"
-
-      /> -->
-      <!-- src from product.images -->
       <img
         mat-card-image
         alt="Photo of a Shiba Inu"
@@ -26,21 +27,7 @@
       </mat-card-content>
     </mat-card>
   </div>
+  <div *ngIf="products?.length === 0">
+    <p>No hay productos</p>
+  </div>
 </main>
-
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.id }}</td>
-      <td>{{ product.title }}</td>
-      <td>{{ product.price }}</td>
-    </tr>
-  </tbody>
-</table>
